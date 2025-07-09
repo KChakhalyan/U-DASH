@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { useAuthStore } from "@/store/auth-store"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { setCookie } from "cookies-next"
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
   const router = useRouter()
@@ -26,9 +27,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
       role: "admin",
     })
 
-    const authState = useAuthStore.getState()
-    console.log("✅ Auth Store after login:", authState)
 
+    // ✅ Установим cookie
+    setCookie('auth', 'true', { path: '/' })
     router.push("/dashboard")
   }
 
