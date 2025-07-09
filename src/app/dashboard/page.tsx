@@ -1,3 +1,4 @@
+
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 
 export default function Page() {
+
   return (
     <SidebarProvider>
       <AppSidebar />

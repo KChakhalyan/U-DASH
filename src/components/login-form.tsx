@@ -19,6 +19,7 @@ export function LoginForm({
     login({
       name: "John Doe",
       email: "john@example.com",
+      password: "password123",
       role: "admin", // или "manager" или "user"
     })
     router.push("/dashboard")

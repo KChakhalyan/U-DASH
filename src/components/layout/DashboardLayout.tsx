@@ -1,16 +1,27 @@
-import DashboardSidebar from "@/components/layout/DashboardSidebar"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+"use client"
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="flex min-h-screen">
-            <DashboardSidebar />
-            <div className="flex-1 flex flex-col">
-                <DashboardHeader />
-                <main className="p-6 bg-muted min-h-[calc(100vh-64px)]">
-                    {children}
-                </main>
-            </div>
-        </div>
-    )
+import { useAuthStore } from "@/store/auth-store"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { ReactNode } from "react"
+import DashboardLayout from "@/components/layout/DashboardLayout"
+
+export default function DashboardPageLayout({ children }: { children: ReactNode }) {
+    const { isAuthenticated } = useAuthStore()
+    const router = useRouter()
+    const [hydrated, setHydrated] = useState(false)
+
+    useEffect(() => {
+        setHydrated(true)
+    }, [])
+
+    useEffect(() => {
+        if (hydrated && !isAuthenticated) {
+            router.push("/login")
+        }
+    }, [hydrated, isAuthenticated, router])
+
+    if (!hydrated) return null  // Предотвращаем мигание
+
+    return <DashboardLayout>{children}</DashboardLayout>
 }
