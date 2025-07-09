@@ -1,31 +1,30 @@
-"use client"
+'use client'
 
 import { useAuthStore } from "@/store/auth-store"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { ReactNode } from "react"
 import DashboardLayout from "@/components/layout/DashboardLayout"
 
-export default function DashboardPageLayout({ children }: { children: ReactNode }) {
+export default function DashboardPageLayout({ children }: { children: React.ReactNode }) {
     const { isAuthenticated } = useAuthStore()
     const router = useRouter()
     const [hydrated, setHydrated] = useState(false)
 
+    // Один раз ставим hydrated
     useEffect(() => {
         setHydrated(true)
     }, [])
 
+    // Только после гидрации проверяем auth
     useEffect(() => {
-        console.log("Hydrated:", hydrated)
-        console.log("isAuthenticated:", isAuthenticated)
-        console.log("user:", useAuthStore.getState().user)
-
-        if (hydrated && !isAuthenticated) {
-            router.push("/login")
+        if (hydrated) {
+            if (!isAuthenticated) {
+                router.push("/login")
+            }
         }
     }, [hydrated, isAuthenticated, router])
 
-    if (!hydrated) return <div className="p-4">Loading...</div>  // Можно вставить спиннер
+    if (!hydrated) return null
 
     return <DashboardLayout>{children}</DashboardLayout>
 }
