@@ -1,5 +1,6 @@
 
 import { AppSidebar } from "@/components/app-sidebar"
+import UserTable from "@/components/dashboard/UserTable"
 import DashboardCards from "@/components/DashboardCards"
 import LineCharts from "@/components/LineChart"
 import {
@@ -16,6 +17,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { User } from "lucide-react"
 import { Line } from "recharts"
 
 export default function Page() {
@@ -52,6 +54,9 @@ export default function Page() {
           </div>
           <div className="min-h-min flex-1 rounded-xl md:min-h-min">
             <LineCharts />
+          </div>
+          <div className="min-h-min flex-1 rounded-xl md:min-h-min">
+            <UserTable />
           </div>
         </div>
       </SidebarInset>
