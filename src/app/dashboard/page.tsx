@@ -1,5 +1,6 @@
 
 import { AppSidebar } from "@/components/app-sidebar"
+import RoleDistributionChart from "@/components/dashboard/RoleDistributionChart"
 import UserTable from "@/components/dashboard/UserTable"
 import DashboardCards from "@/components/DashboardCards"
 import LineCharts from "@/components/LineChart"
@@ -52,8 +53,9 @@ export default function Page() {
           <div className="grid gap-4">
             <DashboardCards />
           </div>
-          <div className="min-h-min flex-1 rounded-xl md:min-h-min">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-1 mb-6">
             <LineCharts />
+            <RoleDistributionChart />
           </div>
           <div className="min-h-min flex-1 rounded-xl md:min-h-min">
             <UserTable />
